@@ -25,4 +25,16 @@ public class CategoryController {
     public ResponseEntity<?> createCategory(@Valid @RequestBody CategoryModel categoryModel){
         return categoryService.createCategory(categoryModel);
     }
+
+    @PostMapping("/updateCategory")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> updateCategory(@Valid @RequestBody CategoryModel categoryModel){
+        return categoryService.updateCategory(categoryModel);
+    }
+
+    @DeleteMapping("/deleteCategory")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> deleteCategory(@Valid @RequestBody CategoryModel categoryModel){
+        return categoryService.deleteCategory(categoryModel);
+    }
 }
