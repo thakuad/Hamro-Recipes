@@ -18,7 +18,8 @@ public class CategoryModel {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date lastUpdated;
 
-    public CategoryModel(){}
+    public CategoryModel() {
+    }
 
     public CategoryModel(String name, String image, Date createDate, Date lastUpdated) {
         this.name = name;

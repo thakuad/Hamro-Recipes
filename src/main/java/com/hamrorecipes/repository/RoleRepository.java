@@ -7,5 +7,5 @@ import com.hamrorecipes.models.RoleModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface RoleRepository extends MongoRepository<RoleModel, String> {
-  Optional<RoleModel> findByName(ERole name);
+    Optional<RoleModel> findByName(ERole name);
 }

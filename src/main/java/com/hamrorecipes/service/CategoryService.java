@@ -22,11 +22,11 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public ResponseEntity<?> createCategory (CategoryModel categoryModel){
-        if (categoryRepository.existsByName(categoryModel.getName())){
+    public ResponseEntity<?> createCategory(CategoryModel categoryModel) {
+        if (categoryRepository.existsByName(categoryModel.getName())) {
             logger.info(" category name : {} already exist", categoryModel.getName());
             return ResponseEntity.ok(new MessageResponse("Category Already Exist in the Server"));
-        }else{
+        } else {
 
             categoryRepository.save(categoryModel);
             logger.debug("Saving category name : {}", categoryModel.getName());
@@ -35,24 +35,24 @@ public class CategoryService {
         }
     }
 
-    public ResponseEntity<?> updateCategory(CategoryModel categoryModel){
+    public ResponseEntity<?> updateCategory(CategoryModel categoryModel) {
         Optional<?> category = categoryRepository.findById(categoryModel.getId());
-        if (category.isPresent()){
+        if (category.isPresent()) {
             CategoryModel model = categoryModel;
             categoryRepository.save(model);
             return ResponseEntity.ok(model);
-        }else{
+        } else {
             return createCategory(categoryModel);
         }
     }
 
-    public ResponseEntity<?> deleteCategory(CategoryModel categoryModel){
+    public ResponseEntity<?> deleteCategory(CategoryModel categoryModel) {
         Optional<?> category = categoryRepository.findById(categoryModel.getId());
-        if (category.isPresent()){
+        if (category.isPresent()) {
             categoryRepository.deleteById(categoryModel.getId());
             return ResponseEntity
-                    .ok(new MessageResponse("The Category is successfully deleted: " +  categoryModel.getName()));
-        }else{
+                    .ok(new MessageResponse("The Category is successfully deleted: " + categoryModel.getName()));
+        } else {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(new MessageResponse("Category did not find into database: " + categoryModel.getName()));

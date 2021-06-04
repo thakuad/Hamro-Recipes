@@ -12,20 +12,20 @@ import com.hamrorecipes.repository.UserRepository;
 @Service
 public class UserDetailService implements UserDetailsService {
 
-	private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserDetailService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-	@Override
-	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserModel user = userRepository.findByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-		return UserService.build(user);
-	}
+        return UserService.build(user);
+    }
 
 }
 

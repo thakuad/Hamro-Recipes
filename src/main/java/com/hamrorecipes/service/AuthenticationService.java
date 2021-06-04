@@ -44,7 +44,7 @@ public class AuthenticationService {
         this.jwtUtils = jwtUtils;
     }
 
-    public ResponseEntity<?> authenticateUser(@NotNull LoginRequest loginRequest){
+    public ResponseEntity<?> authenticateUser(@NotNull LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -63,7 +63,7 @@ public class AuthenticationService {
                 roles));
     }
 
-    public ResponseEntity<?> registerUser(@NotNull SignupRequest signupRequest){
+    public ResponseEntity<?> registerUser(@NotNull SignupRequest signupRequest) {
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -111,10 +111,10 @@ public class AuthenticationService {
                         RoleModel roleModels = new RoleModel();
                         Optional<RoleModel> roleOpt = roleRepository.findByName(ERole.ROLE_USER);
                         roleOpt.ifPresent(roles::add);
-                        if (!roleOpt.isPresent()){
-                             roleModels.setName(ERole.ROLE_USER);
-                           roles.add(roleModels);
-                           roleRepository.save(roleModels);
+                        if (!roleOpt.isPresent()) {
+                            roleModels.setName(ERole.ROLE_USER);
+                            roles.add(roleModels);
+                            roleRepository.save(roleModels);
 
                         }
 
